@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     state: DataTypes.STRING(50),
     country: DataTypes.STRING(50),
     mobile: DataTypes.STRING(15),
-    is_in_cab: DataTypes.BOOLEAN,
+    travel_status: DataTypes.BOOLEAN,
   }, {
     tableName: 'users',
   });

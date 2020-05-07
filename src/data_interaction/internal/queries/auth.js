@@ -6,7 +6,6 @@ const checkValidUser = async (params) => User.findAll({
     'uuid',
     'username',
     'password',
-    'is_active',
   ],
   where: {
     username: params.username,

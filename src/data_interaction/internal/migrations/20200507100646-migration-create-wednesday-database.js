@@ -49,6 +49,11 @@ module.exports = {
       allowNull: false,
       unique: true,
     },
+    travel_status: {
+      type: Sequelize.STRING(100),
+      allowNull: true,
+      defaultValue: 'Away',
+    },
     createdAt: {
       type: Sequelize.DATE,
       allowNull: false,

@@ -13,6 +13,7 @@ module.exports = {
     cab_current_status: {
       type: Sequelize.STRING(20),
       allowNull: true,
+      defaultValue: 'Active',
     },
     first_name: {
       type: Sequelize.STRING(100),

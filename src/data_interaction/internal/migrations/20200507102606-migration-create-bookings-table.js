@@ -8,7 +8,7 @@ module.exports = {
     },
     booking_start_time: {
       type: Sequelize.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     booking_end_time: {
       type: Sequelize.DATE,
@@ -33,6 +33,7 @@ module.exports = {
     booking_status: {
       type: Sequelize.STRING(20),
       allowNull: true,
+      defaultValue: 'Waiting',
     },
     createdAt: {
       type: Sequelize.DATE,

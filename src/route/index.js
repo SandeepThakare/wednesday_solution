@@ -2,12 +2,18 @@ import express from 'express';
 import { createValidator } from 'express-joi-validation';
 import { requestParamsType } from '../common/constants';
 
-// import doctor from './doctor';
+import users from './users';
+import auth from './auth';
+import cabs from './cabs';
+import bookings from './bookings';
 
 const router = express.Router();
 const validator = createValidator();
 const routeHandlers = [
-  // ...doctor,
+  ...users,
+  ...auth,
+  ...cabs,
+  ...bookings,
 ];
 
 routeHandlers.forEach((item) => {

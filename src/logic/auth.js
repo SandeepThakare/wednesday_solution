@@ -6,7 +6,7 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { TokenUtility } from '../common';
-import auth from '../data_interaction/internal/queries';
+import { auth } from '../data_interaction/internal/queries';
 
 /**
  * serialize the generated access token
