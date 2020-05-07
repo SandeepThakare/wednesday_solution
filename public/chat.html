@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My First Node App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+    integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+    integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <br>
+    <div class="jumbotron">
+      <h1 class="display-4">Send Message</h1>
+      <br>
+      <input id="name" class="form-control" placeholder="Name">
+      <br>
+      <textarea id="message" class="form-control" placeholder="Your Message Here"></textarea>
+      <br>
+      <button id="send" class="btn btn-success">Send</button>
+    </div>
+    <div id="messages">
+
+    </div>
+  </div>
+  <script>
+    var socket = io.connect('http://3.90.154.225:3001', { query: "userId=92e61ad0-8c60-4f20-988f-4961aa38cca5" });
+    $(() => {
+      $("#send").click(() => {
+        sendMessage({ name: $("#name").val(), message: $("#message").val() });
+        socket.emit('onsendmessage', {
+          "conversation_id": "43c8ade6-880e-4f5e-bd09-8eafb3e29105",
+          "sender": "92e61ad0-8c60-4f20-988f-4961aa38cca",
+          "receiver": "c75dcbba-7f9e-488c-9278-bba9882132ba",
+          "read": false,
+          "message": "Hi..... from Sandeep",
+          "room": "demochatroom"
+        });
+      })
+      getMessages();
+    })
+
+    socket.on('onconnect', (userId) => {
+      console.log('User Id is connected chat2---- ', userId);
+    });
+
+    socket.emit('join', {
+      "username": "92e61ad0-8c60-4f20-988f-4961aa38cca5",
+      "room": "demochatroom"
+    });
+
+    socket.on('onuserjoin', (result) => {
+      console.log('User Join --- ', result);
+    });
+
+    socket.on('onreceivemessage', (message) => {
+      console.log('message is --- ', message);
+    });
+
+    function addMessages(message) {
+      $("#messages").append(`<h4> ${message.name} </h4> <p> ${message.message} </p>`)
+    }
+
+    function getMessages() {
+      $.get('http://localhost:3001/messages', (data) => {
+        data.forEach(addMessages);
+      })
+    }
+
+    function sendMessage(message) {
+      $.post('http://localhost:3001/messages', message)
+    }
+  </script>
+</body>
+
+</html>
