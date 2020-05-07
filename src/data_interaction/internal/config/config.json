@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "mysqlroot",
-    "database": "sehatek",
+    "database": "wednesday",
     "host": "localhost",
     "dialect": "mysql",
     "operatorsAliases": 0
