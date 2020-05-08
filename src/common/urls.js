@@ -14,7 +14,9 @@ export const bookings = {
   CREATE_BOOKINGS: `${BOOKINGS_BASE}/create`,
   EDIT_BOOKINGS: `${BOOKINGS_BASE}/edit`,
   FETCH_BOOKINGS: `${BOOKINGS_BASE}/list`,
-  FETCH_USER_BOOKINGS: `${BOOKINGS_BASE}/fetchUserBokkings`,
+  FETCH_USER_BOOKINGS: `${BOOKINGS_BASE}/fetchUserBookings`,
+  CONFIRM_BOOKING: `${BOOKINGS_BASE}/confirmBooking`,
+  END_BOOKING: `${BOOKINGS_BASE}/endBooking`,
 };
 
 const CABS_BASE = '/cabs';

@@ -1,5 +1,6 @@
 import { uuid } from 'uuidv4';
-import { Cabs } from '../models';
+import camelcaseKeys from 'camelcase-keys';
+import { Cabs, Sequelize } from '../models';
 
 const createCabsUser = async (params) => {
   const generateUUID = uuid();
@@ -111,9 +112,56 @@ const updateCabStatus = async (params) => {
     }));
 };
 
+const fetchAvailableCabs = ({
+  currentLocationLattitude,
+  currentLocationLongitude,
+  limit = 10,
+  skip = 0,
+}) => Cabs.findAll({
+  raw: true,
+  attributes: [
+    'uuid',
+    'cab_number',
+    'first_name',
+    'last_name',
+    'current_location_longitude',
+    'current_location_lattitude',
+  ],
+  where: {
+    cab_current_status: 'Active',
+    [Sequelize.Op.and]: [
+      {
+        current_location_longitude: {
+          [Sequelize.Op.between]: [currentLocationLongitude - 0.1, currentLocationLongitude + 0.1],
+        },
+      },
+      {
+        current_location_lattitude: {
+          [Sequelize.Op.between]: [currentLocationLattitude - 0.1, currentLocationLattitude + 0.1],
+        },
+      },
+    ],
+  },
+  limit,
+  offset: skip,
+})
+  .then((response) => ({
+    status: true,
+    message: 'Data fetched successfully.',
+    data: camelcaseKeys(response),
+  }))
+  .catch((error) => {
+    console.log(error);
+    return {
+      status: false,
+      message: error.message,
+    };
+  });
+
 export default {
   createCabsUser,
   editCabsUser,
   checkCabStatus,
   updateCabStatus,
+  fetchAvailableCabs,
 };

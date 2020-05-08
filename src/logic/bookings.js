@@ -20,6 +20,49 @@ const createBooking = async (params) => {
   }
 };
 
+const confirmBooking = async (params) => {
+  try {
+    const result = await bookings.confirmBooking(params);
+    const cabResult = await cabs.updateCabStatus({ cabId: result.data.bookingCabId, status: 'Booked' });
+
+    return result;
+  } catch (error) {
+    return {
+      status: false,
+      error: error.message,
+    };
+  }
+};
+
+const endBooking = async (params) => {
+  try {
+    const result = await bookings.endBooking(params);
+    const cabResult = await cabs.updateCabStatus({ cabId: result.data.bookingCabId, status: 'Active' });
+
+    return result;
+
+  } catch (error) {
+    return {
+      status: false,
+      error: error.message,
+    };
+  }
+};
+
+const fetchBookings = async (params) => {
+  try {
+    return bookings.fetchAllBookings(params);
+  } catch (error) {
+    return {
+      status: false,
+      error: error.message,
+    };
+  }
+};
+
 export default {
   createBooking,
+  confirmBooking,
+  endBooking,
+  fetchBookings,
 };

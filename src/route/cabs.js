@@ -19,6 +19,21 @@ const createCabsUserRoute = {
   handler: createCabsUserHandler,
 };
 
+const fetchAvailableCabsHandler = async (params) => cabs.fetchAvailableCabs(params);
+
+const fetchAvailableCabsRoute = {
+  method: requestMethodType.POST,
+  url: URLS.FETCH_AVAILABLE_CABS,
+  validation: Joi.object({
+    currentLocationLongitude: Joi.number().required(),
+    currentLocationLattitude: Joi.number().required(),
+    limit: Joi.number().optional(),
+    skip: Joi.number().optional(),
+  }),
+  handler: fetchAvailableCabsHandler,
+};
+
 export default [
   createCabsUserRoute,
+  fetchAvailableCabsRoute,
 ];

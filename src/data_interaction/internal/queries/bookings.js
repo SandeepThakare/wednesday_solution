@@ -1,5 +1,6 @@
 import { uuid } from 'uuidv4';
-import { Bookings } from '../models';
+import camelcaseKeys from 'camelcase-keys';
+import { Bookings, Cabs, Sequelize } from '../models';
 
 const createBooking = async (params) => {
   const generateUUID = uuid();
@@ -75,7 +76,92 @@ const editBooking = async (params) => {
     }));
 };
 
+const confirmBooking = async ({ bookingId, bookingStartTime }) => Bookings.update({
+  booking_status: 'Confirmed',
+  booking_start_time: bookingStartTime,
+}, {
+  where: {
+    uuid: bookingId,
+  },
+  returning: true,
+  plain: true,
+})
+  .then(async () => {
+    const response = await Bookings.findOne({ raw: true, where: { uuid: bookingId } });
+    return {
+      state: true,
+      message: 'Booking Completed !!!',
+      data: camelcaseKeys(response),
+    };
+  })
+  .catch((error) => ({
+    status: false,
+    message: error.message,
+  }));
+
+const endBooking = async ({ bookingId, bookingEndTime }) => Bookings.update({
+  booking_status: 'Completed',
+  booking_end_time: bookingEndTime,
+}, {
+  where: {
+    uuid: bookingId,
+  },
+  returning: true,
+  plain: true,
+})
+  .then(async () => {
+    const response = await Bookings.findOne({ raw: true, where: { uuid: bookingId } });
+    return {
+      state: true,
+      message: 'Booking Completed !!!',
+      data: camelcaseKeys(response),
+    };
+  })
+  .catch((error) => ({
+    status: false,
+    message: error.message,
+  }));
+
+const fetchAllBookings = async ({ userId }) => Bookings.findAll({
+  raw: true,
+  attributes: [
+    'uuid',
+    'booking_start_time',
+    'booking_end_time',
+    'rating',
+    'booking_from_longitude',
+    'booking_from_lattitude',
+    'booking_to_longitude',
+    'booking_to_lattitude',
+    [Sequelize.col('Cab.cab_number'), 'cabNumber'],
+    [Sequelize.col('Cab.first_name'), 'cabDriverFirstName'],
+    [Sequelize.col('Cab.last_name'), 'cabDriverLastName'],
+  ],
+  include: [
+    {
+      attributes: [],
+      model: Cabs,
+    },
+  ],
+  where: {
+    booking_owner: userId,
+    booking_status: 'Completed',
+  },
+})
+  .then(async (response) => ({
+    state: true,
+    message: 'Fetch Data Successfully !!!',
+    data: camelcaseKeys(response),
+  }))
+  .catch((error) => ({
+    status: false,
+    message: error.message,
+  }));
+
 export default {
   createBooking,
   editBooking,
+  confirmBooking,
+  endBooking,
+  fetchAllBookings,
 };
