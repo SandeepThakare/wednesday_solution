@@ -112,7 +112,7 @@ const startRide = async ({ bookingId, bookingStartTime }) => Bookings.update({
     const response = await Bookings.findOne({ raw: true, where: { uuid: bookingId } });
     return {
       state: true,
-      message: 'Booking Confirmed !!!',
+      message: 'Ride Started !!!',
       data: camelcaseKeys(response),
     };
   })

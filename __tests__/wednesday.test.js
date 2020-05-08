@@ -8,10 +8,11 @@ const {
   cabsSuccessConstant,
   cabsErrorConstant,
   bookingConfirmSuccess,
-  bookingConfirmError,
   bookingEndSuccess,
   bookingEndError,
-  bookingListSucess,
+  bookingListSuccess,
+  startRideSuccess,
+  startRideError,
 } = require('./testConstants');
 
 let token = null;
@@ -109,7 +110,29 @@ describe('Booking Confirm Test Cases', () => {
     const { statusCode, text } = await appTest
       .post('/wednesday/api/bookings/confirmBooking')
       .set({ Authorization: token })
-      .send(bookingConfirmError);
+      .send({});
+
+    expect(statusCode).toEqual(400);
+    expect(text).toEqual('Error validating request body. \"bookingId\" is required.');
+  });
+});
+
+describe('Ride Start Test Cases', () => {
+  it('should return ride start message', async () => {
+    const { statusCode, body } = await appTest
+      .post('/wednesday/api/bookings/startRide')
+      .set({ Authorization: token })
+      .send(startRideSuccess);
+
+    expect(statusCode).toEqual(200);
+    expect(body.message).toEqual('Ride Started !!!');
+  });
+
+  it('should return validation error on ride start', async () => {
+    const { statusCode, text } = await appTest
+      .post('/wednesday/api/bookings/startRide')
+      .set({ Authorization: token })
+      .send(startRideError);
 
     expect(statusCode).toEqual(400);
     expect(text).toEqual('Error validating request body. \"bookingId\" is required.');
@@ -143,7 +166,7 @@ describe('Booking List Test Cases', () => {
     const { statusCode, body } = await appTest
       .post('/wednesday/api/bookings/list')
       .set({ Authorization: token })
-      .send(bookingListSucess);
+      .send(bookingListSuccess);
 
     expect(statusCode).toEqual(200);
     expect(body.message).toEqual('Fetch Data Successfully !!!');

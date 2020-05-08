@@ -57,11 +57,6 @@ const cabsErrorConstant = {
 
 const bookingConfirmSuccess = {
   bookingId: 'dfcdd5cb-169f-4fcb-82a5-ecf0a66cd3af',
-  bookingStartTime: '2020-05-08 02:39:46',
-};
-
-const bookingConfirmError = {
-  bookingStartTime: '2020-05-08 02:39:46',
 };
 
 const bookingEndSuccess = {
@@ -73,8 +68,17 @@ const bookingEndError = {
   bookingEndTime: '2020-05-08 03:39:46',
 };
 
-const bookingListSucess = {
+const bookingListSuccess = {
   userId: 'd241b20a-157b-4ccb-b76f-24c5d5443749',
+};
+
+const startRideSuccess = {
+  bookingId: 'dfcdd5cb-169f-4fcb-82a5-ecf0a66cd3af',
+  bookingStartTime: '2020-05-08 02:39:46',
+};
+
+const startRideError = {
+  bookingStartTime: '2020-05-08 02:39:46',
 };
 
 module.exports = {
@@ -85,8 +89,9 @@ module.exports = {
   cabsSuccessConstant,
   cabsErrorConstant,
   bookingConfirmSuccess,
-  bookingConfirmError,
   bookingEndSuccess,
   bookingEndError,
-  bookingListSucess,
+  bookingListSuccess,
+  startRideSuccess,
+  startRideError,
 };
