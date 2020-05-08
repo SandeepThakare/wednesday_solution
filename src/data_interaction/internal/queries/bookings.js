@@ -3,8 +3,6 @@ import camelcaseKeys from 'camelcase-keys';
 import { Bookings, Cabs, Sequelize } from '../models';
 
 const createBooking = async (params) => {
-  console.log('Inside params --- ', params);
-
   const generateUUID = uuid();
   const {
     bookingStartTime,
@@ -92,7 +90,7 @@ const confirmBooking = async ({ bookingId, bookingStartTime }) => Bookings.updat
     const response = await Bookings.findOne({ raw: true, where: { uuid: bookingId } });
     return {
       state: true,
-      message: 'Booking Completed !!!',
+      message: 'Booking Confirmed !!!',
       data: camelcaseKeys(response),
     };
   })

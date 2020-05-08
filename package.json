@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon src/bin/www",
     "migrate": "npx sequelize-cli db:migrate",
-    "test": "cross-env NODE_ENV=test jest --testTimeout=10000"
+    "test": "jest --coverage --forceExit --maxWorkers=10"
   },
   "jest": {
     "preset": "jest-puppeteer",
