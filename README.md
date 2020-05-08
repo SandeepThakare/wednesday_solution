@@ -37,5 +37,12 @@
     localhost:3001/wednesday/api/<controller_path>
 
 -----------------------------------
+# Test Cases:
+#### To run test cases run the below command
 
-### For detail api description please see attached doc with the mail
+`npm test`
+
+*Note: Please make sure you run all above migrations and create database which you configured in config file*
+
+-----------------------------------
+### For detail api description please see attached doc with the email
