@@ -14,6 +14,8 @@ const {
   bookingListSucess,
 } = require('./testConstants');
 
+let token = null;
+
 describe('User Test Cases', () => {
   it('should create a new user', async () => {
     const { statusCode } = await appTest
@@ -40,7 +42,6 @@ describe('User Test Cases', () => {
 });
 
 describe('Booking Test Cases', () => {
-  let token = null;
   beforeAll(async () => {
     const { body } = await appTest.post('/wednesday/api/auth/login')
       .send({
@@ -72,16 +73,6 @@ describe('Booking Test Cases', () => {
 });
 
 describe('Cabs Users Test Cases', () => {
-  let token = null;
-  beforeAll(async () => {
-    const { body } = await appTest.post('/wednesday/api/auth/login')
-      .send({
-        username: 'sandeepthakare',
-        password: 'S@ndeep123',
-      });
-    token = body.accessToken;
-  });
-
   it('should create a new cab to book', async () => {
     const { statusCode, body } = await appTest
       .post('/wednesday/api/cabs/create')
@@ -104,16 +95,6 @@ describe('Cabs Users Test Cases', () => {
 });
 
 describe('Booking Confirm Test Cases', () => {
-  let token = null;
-  beforeAll(async () => {
-    const { body } = await appTest.post('/wednesday/api/auth/login')
-      .send({
-        username: 'sandeepthakare',
-        password: 'S@ndeep123',
-      });
-    token = body.accessToken;
-  });
-
   it('should return booking confirm message', async () => {
     const { statusCode, body } = await appTest
       .post('/wednesday/api/bookings/confirmBooking')
@@ -136,16 +117,6 @@ describe('Booking Confirm Test Cases', () => {
 });
 
 describe('Booking End Test Cases', () => {
-  let token = null;
-  beforeAll(async () => {
-    const { body } = await appTest.post('/wednesday/api/auth/login')
-      .send({
-        username: 'sandeepthakare',
-        password: 'S@ndeep123',
-      });
-    token = body.accessToken;
-  });
-
   it('should return booking end message', async () => {
     const { statusCode, body } = await appTest
       .post('/wednesday/api/bookings/endBooking')
@@ -168,16 +139,6 @@ describe('Booking End Test Cases', () => {
 });
 
 describe('Booking List Test Cases', () => {
-  let token = null;
-  beforeAll(async () => {
-    const { body } = await appTest.post('/wednesday/api/auth/login')
-      .send({
-        username: 'sandeepthakare',
-        password: 'S@ndeep123',
-      });
-    token = body.accessToken;
-  });
-
   it('should return booking end message', async () => {
     const { statusCode, body } = await appTest
       .post('/wednesday/api/bookings/list')

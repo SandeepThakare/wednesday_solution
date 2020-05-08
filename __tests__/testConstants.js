@@ -56,7 +56,7 @@ const cabsErrorConstant = {
 };
 
 const bookingConfirmSuccess = {
-  bookingId: 'e6f15c93-3680-4e7e-9fc3-6cd3f1169df9',
+  bookingId: 'dfcdd5cb-169f-4fcb-82a5-ecf0a66cd3af',
   bookingStartTime: '2020-05-08 02:39:46',
 };
 
@@ -65,7 +65,7 @@ const bookingConfirmError = {
 };
 
 const bookingEndSuccess = {
-  bookingId: '42528012-1881-4664-8252-80f97c99ea6a',
+  bookingId: 'dfcdd5cb-169f-4fcb-82a5-ecf0a66cd3af',
   bookingEndTime: '2020-05-08 03:39:46',
 };
 

@@ -76,8 +76,30 @@ const editBooking = async (params) => {
     }));
 };
 
-const confirmBooking = async ({ bookingId, bookingStartTime }) => Bookings.update({
+const confirmBooking = async ({ bookingId }) => Bookings.update({
   booking_status: 'Confirmed',
+}, {
+  where: {
+    uuid: bookingId,
+  },
+  returning: true,
+  plain: true,
+})
+  .then(async () => {
+    const response = await Bookings.findOne({ raw: true, where: { uuid: bookingId } });
+    return {
+      state: true,
+      message: 'Booking Confirmed !!!',
+      data: camelcaseKeys(response),
+    };
+  })
+  .catch((error) => ({
+    status: false,
+    message: error.message,
+  }));
+
+const startRide = async ({ bookingId, bookingStartTime }) => Bookings.update({
+  booking_status: 'Started',
   booking_start_time: bookingStartTime,
 }, {
   where: {
@@ -166,4 +188,5 @@ export default {
   confirmBooking,
   endBooking,
   fetchAllBookings,
+  startRide,
 };

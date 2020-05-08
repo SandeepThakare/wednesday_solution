@@ -1,19 +1,41 @@
+# How to up the Backend
+
+## Required dependancies
+1. nodejs must be installed,
+    **link to install :** https://nodejs.org/en/download/
+2. mysql must be install locally and service is up
+    **link to install :**
+        1. For windows: https://dev.mysql.com/downloads/installer/
+        2. For Mac and Ubuntu: https://linuxize.com/post/how-to-install-mysql-on-ubuntu-18-04/
+3. npm must be install to install node packages 
+    **link to install :** https://nodejs.org/en/download/
+
 ## Install packages
 `npm install`
 
-## Application Setup
+## Install sequelize cli globally
+`npm install -g sequelize-cli`
+
+-----------------------------------------------
+# Application Setup
 #### Database (MySQL)
 1. Configure database connections and dialect by making the required changes in 
-    src/data_interaction/internal/config/config.json
+    backend/src/data_interaction/internal/config/config.json
+
+2. Make Sure you create database in Mysql db before you run migration, the name should be one you setup in config file
 
 2. Run migrations by running the following commands from application root::
 
-    `cd src/data_interaction/internal`
+    `cd backend/src/data_interaction/internal`
     
-    `npm sequelize-cli db:migrate`
+    `npx sequelize-cli db:migrate`
 
 ## Run application
     npm start
 
 #### Access application
     localhost:3001/wednesday/api/<controller_path>
+
+-----------------------------------
+
+### For detail api description please see attached doc with the mail

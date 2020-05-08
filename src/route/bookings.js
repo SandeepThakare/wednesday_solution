@@ -29,9 +29,20 @@ const confirmBookingRoute = {
   url: URLS.CONFIRM_BOOKING,
   validation: Joi.object({
     bookingId: Joi.string().guid({ version: 'uuidv4' }).required(),
-    bookingStartTime: Joi.string().required(),
   }),
   handler: confirmBookingHandler,
+};
+
+const startRideHandler = async (params) => bookings.startRide(params);
+
+const startRideRoute = {
+  method: requestMethodType.POST,
+  url: URLS.START_RIDE,
+  validation: Joi.object({
+    bookingId: Joi.string().guid({ version: 'uuidv4' }).required(),
+    bookingStartTime: Joi.string().required(),
+  }),
+  handler: startRideHandler,
 };
 
 const endBookingHandler = async (params) => bookings.endBooking(params);
@@ -65,4 +76,5 @@ export default [
   confirmBookingRoute,
   endBookingRoute,
   fetchBookingRoute,
+  startRideRoute,
 ];

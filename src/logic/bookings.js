@@ -34,6 +34,17 @@ const confirmBooking = async (params) => {
   }
 };
 
+const startRide = async (params) => {
+  try {
+    return bookings.startRide(params);
+  } catch (error) {
+    return {
+      status: false,
+      error: error.message,
+    };
+  }
+};
+
 const endBooking = async (params) => {
   try {
     const result = await bookings.endBooking(params);
@@ -64,4 +75,5 @@ export default {
   confirmBooking,
   endBooking,
   fetchBookings,
+  startRide,
 };
