@@ -53,6 +53,8 @@ const fetchBookingRoute = {
   url: URLS.FETCH_BOOKINGS,
   validation: Joi.object({
     userId: Joi.string().guid({ version: 'uuidv4' }).required(),
+    limit: Joi.number().optional(),
+    skip: Joi.number().optional(),
   }),
   handler: fetchBookingHandler,
 };

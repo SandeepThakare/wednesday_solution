@@ -1,0 +1,15 @@
+module.exports = {
+  moduleFileExtensions: ['js', 'jsx', 'json', 'vue'],
+  transform: {
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
+      'jest-transform-stub',
+    '^.+\\.(js|jsx)?$': 'babel-jest',
+  },
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  testMatch: [
+    '<rootDir>/__tests__/*.test.js',
+  ],
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
+};

@@ -3,6 +3,8 @@ import camelcaseKeys from 'camelcase-keys';
 import { Bookings, Cabs, Sequelize } from '../models';
 
 const createBooking = async (params) => {
+  console.log('Inside params --- ', params);
+
   const generateUUID = uuid();
   const {
     bookingStartTime,
@@ -122,7 +124,7 @@ const endBooking = async ({ bookingId, bookingEndTime }) => Bookings.update({
     message: error.message,
   }));
 
-const fetchAllBookings = async ({ userId }) => Bookings.findAll({
+const fetchAllBookings = async ({ userId, limit, skip }) => Bookings.findAll({
   raw: true,
   attributes: [
     'uuid',
@@ -147,6 +149,8 @@ const fetchAllBookings = async ({ userId }) => Bookings.findAll({
     booking_owner: userId,
     booking_status: 'Completed',
   },
+  limit: limit || 10,
+  offset: skip || 0,
 })
   .then(async (response) => ({
     state: true,

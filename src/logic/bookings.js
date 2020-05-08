@@ -40,7 +40,6 @@ const endBooking = async (params) => {
     const cabResult = await cabs.updateCabStatus({ cabId: result.data.bookingCabId, status: 'Active' });
 
     return result;
-
   } catch (error) {
     return {
       status: false,
