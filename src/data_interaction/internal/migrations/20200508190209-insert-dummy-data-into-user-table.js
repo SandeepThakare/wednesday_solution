@@ -1,0 +1,36 @@
+
+module.exports = {
+  up: (queryInterface) => queryInterface.bulkInsert('users', [{
+    uuid: '55f88adf-1c04-4f6c-9ca6-c3a2f7c5ef2e',
+    username: 'sandeepthakare111',
+    password: 'S@ndeep123',
+    first_name: 'Sandeep',
+    last_name: 'Thakare',
+    city: 'Nagpur',
+    state: 'Maharashtra',
+    country: 'India',
+    mobile: '8956916390',
+    email: 'sandythakare9@gmail.com',
+    travel_status: 'Away',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    uuid: 'b391f256-dad6-472e-bee3-e3d64386697c',
+    username: 'sandeepthakare',
+    password: 'S@ndeep123',
+    first_name: 'Sandeep',
+    last_name: 'Thakare',
+    city: 'Nagpur',
+    state: 'Maharashtra',
+    country: 'India',
+    mobile: '8956916391',
+    email: 'sandythakare1@gmail.com',
+    travel_status: 'Away',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  ], {}),
+
+  down: (queryInterface) => queryInterface.bulkDelete('users', null, {}),
+};

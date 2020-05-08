@@ -16,4 +16,4 @@
     npm start
 
 #### Access application
-    localhost:3001/sehatek/api/<controller_path>
+    localhost:3001/wednesday/api/<controller_path>
